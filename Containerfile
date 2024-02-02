@@ -21,10 +21,12 @@ WORKDIR /opt/app
 COPY dns-ping.sh .
 COPY request-cert.sh .
 COPY --from=builder /tmp/lego-bridge .
+ADD https://raw.githubusercontent.com/kenmoini/homelab/main/pki/root-authorities/klstep-ca.pem /etc/pki/ca-trust/source/anchors/klstep-ca.pem
 
 RUN chmod +x /opt/app/lego-bridge \
  && chmod +x /opt/app/dns-ping.sh \
- && chmod +x /opt/app/request-cert.sh
+ && chmod +x /opt/app/request-cert.sh \
+ && update-ca-trust
 
 USER 1001
 EXPOSE 8080
