@@ -21,10 +21,6 @@ done
 
 JSON_QUERY="${JSON_QUERY%?}]}"
 
-echo $JSON_QUERY
-
-set -x
-
 REQUEST=$(curl -sSL --max-time 600 --connect-timeout 600 -X POST -H "Content-Type: application/json" -d $JSON_QUERY ${SERVER_ENDPOINT}/get-certificate)
 
 STATUS=$(echo $REQUEST | jq -r '.status')
