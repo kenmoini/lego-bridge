@@ -45,3 +45,21 @@ curl -sSL https://raw.githubusercontent.com/kenmoini/lego-bridge/main/request-ce
 ```
 
 Which will save the certificate to `./$FIRST_DOMAIN.crt.pem` and the key to `./$FIRST_DOMAIN.key.pem`
+
+## Setup for Crontab
+
+```bash
+dnf install -y jq curl wget
+
+cd /opt
+
+wget https://raw.githubusercontent.com/kenmoini/lego-bridge/main/cron-wrapper.sh -O cockpit-ssl.sh
+
+chmod a+x cockpit-ssl.sh
+
+crontab -e
+
+# 0 0 3 * * /opt/cockpit-ssl.sh "host.example.com"
+```
+
+Defaults are set to work for Cockpit
