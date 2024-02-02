@@ -12,7 +12,7 @@ RUN dnf install -y go \
 
 FROM quay.io/fedora/fedora:39
 
-RUN dnf install -y bind-utils jq \
+RUN dnf install -y bind-utils curl jq \
  && dnf clean all \
  && rm -rf /var/cache/dnf
 
