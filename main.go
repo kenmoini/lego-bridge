@@ -261,11 +261,7 @@ func setRouter() *gin.Engine {
 	config.AddAllowHeaders("Content-Type")
 	config.AllowCredentials = true
 	config.AllowAllOrigins = true
-	//config.AllowOriginFunc = func(origin string) bool {
-	//		return true
-	//}
 	router.Use(cors.New(config))
-	//router.Use(CORSMiddleware())
 
 	// Enables automatic redirection if the current route can't be matched but a
 	// handler for the path with (without) the trailing slash exists.
