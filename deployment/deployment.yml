@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lego-bridge
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    app: lego-bridge
+    service: lego-bridge
+    component: lego-bridge
+    id: lego-bridge
+spec:
+  selector:
+    matchLabels:
+      app: lego-bridge
+      service: lego-bridge
+      component: lego-bridge
+      id: lego-bridge
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lego-bridge
+        service: lego-bridge
+        component: lego-bridge
+        id: lego-bridge
+    spec:
+      containers:
+        - name: lego-bridge
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          image: quay.io/kenmoini/lego-bridge:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: lego-bridge
+          #livenessProbe:
+          #  httpGet:
+          #    path: /healthz
+          #    port: 8080
+          #  initialDelaySeconds: 3
+          #  periodSeconds: 10
+          #readinessProbe:
+          #  httpGet:
+          #    path: /healthz
+          #    port: 8080
+          #  initialDelaySeconds: 3
+          #  periodSeconds: 10

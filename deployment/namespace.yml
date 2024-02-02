@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lego-bridge
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    app: lego-bridge
+    service: lego-bridge
+    component: lego-bridge
+    id: lego-bridge

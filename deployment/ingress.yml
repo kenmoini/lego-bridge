@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lego-bridge
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+  labels:
+    app: lego-bridge
+    service: lego-bridge
+    component: lego-bridge
+    id: lego-bridge
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: lego-bridge.apps.k8s.kemo.labs
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: lego-bridge
+            port:
+              number: 8080
