@@ -79,11 +79,6 @@ func RequestCertificates(domainsRequested []string) APIResponse {
 		os.Exit(1)
 	}
 
-	//fmt.Printf("PDNS_API_URL: %s\n", pdnsAPIURL)
-	//fmt.Printf("PDNS_API_KEY: %s\n", pdnsAPIKey)
-	//fmt.Printf("ACME_SERVER_URL: %s\n", acmeServerURL)
-	//fmt.Printf("EMAIL_ADDRESS: %s\n", emailAddress)
-
 	// Create a user. New accounts need an email and private key to start.
 	privateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
@@ -117,13 +112,6 @@ func RequestCertificates(domainsRequested []string) APIResponse {
 		log.Fatal(err)
 	}
 
-	// We specify a DNS provider to solve a DNS-01 challenge. You can of course
-	// write your own provider if your favourite DNS provider is not supported
-	// (see the lego/providers package).
-	// apiVersion, err := strconv.Atoi(pdnsAPIVersion)
-	// if err != nil {
-	// log.Fatal(err)
-	// }
 	pdnsServerURL, err := url.Parse(pdnsAPIURL)
 	if err != nil {
 		responseJSON = APIResponse{
@@ -192,7 +180,6 @@ func RequestCertificates(domainsRequested []string) APIResponse {
 	myUser.Registration = reg
 
 	// Run background pings to do something weird
-
 	for _, domain := range domainsRequested {
 		cmd := exec.Command("./dns-ping.sh", domain)
 		cmd.Stdout = os.Stdout
@@ -218,21 +205,22 @@ func RequestCertificates(domainsRequested []string) APIResponse {
 		log.Fatal(err)
 	}
 
-	// Each certificate comes back with the cert bytes, the bytes of the client's
-	// private key, and a certificate URL. SAVE THESE TO DISK.
-	// fmt.Printf("%#v\n", certificates)
-	responseJSON = APIResponse{
-		Certificate: string(certificates.Certificate),
-		Key:         string(certificates.PrivateKey),
-		Status:      "success",
-	}
-
 	// for _, pid := range launchedPIDs {
 	// 	err := exec.Command("kill", "-9", string(pid)).Run()
 	// 	if err != nil {
 	// 		log.Fatal(err)
 	// 	}
 	// }
+
+	// Each certificate comes back with the cert bytes, the bytes of the client's
+	// private key, and a certificate URL. SAVE THESE TO DISK.
+	// fmt.Printf("%#v\n", certificates)
+
+	responseJSON = APIResponse{
+		Certificate: string(certificates.Certificate),
+		Key:         string(certificates.PrivateKey),
+		Status:      "success",
+	}
 
 	return responseJSON
 
@@ -319,7 +307,4 @@ func main() {
 	Router := setRouter()
 
 	Router.Run(serverAddress + ":" + serverPort)
-
-	//req := RequestCertificates([]string{"other.kemo.labs"})
-	//fmt.Printf("%#v\n", req)
 }
