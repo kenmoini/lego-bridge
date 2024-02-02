@@ -11,6 +11,7 @@ metadata:
     component: lego-bridge
     id: lego-bridge
 spec:
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: lego-bridge
