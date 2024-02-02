@@ -227,12 +227,12 @@ func RequestCertificates(domainsRequested []string) APIResponse {
 		Status:      "success",
 	}
 
-	for _, pid := range launchedPIDs {
-		err := exec.Command("kill", "-9", string(pid)).Run()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
+	// for _, pid := range launchedPIDs {
+	// 	err := exec.Command("kill", "-9", string(pid)).Run()
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// }
 
 	return responseJSON
 
