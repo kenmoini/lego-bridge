@@ -39,6 +39,9 @@ export SERVER_ENDPOINT="http://lego-bridge.apps.k8s.kemo.labs"
 
 ./request-cert.sh "test.example.com"
 ./request-cert.sh "test.example.com;other-test.example.com"
+
+# Or pipe things into Bash
+curl -L https://raw.githubusercontent.com/kenmoini/lego-bridge/main/request-cert.sh | bash -s -- "testing.example.com;test2.example.com"
 ```
 
 Which will save the certificate to `./$FIRST_DOMAIN.crt.pem` and the key to `./$FIRST_DOMAIN.key.pem`
