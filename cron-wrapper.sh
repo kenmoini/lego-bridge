@@ -25,7 +25,7 @@ RELOAD_CMD="${RELOAD_CMD:-"systemctl restart cockpit.socket"}"
 
 # IDM
 #CERT_PATH="${CERT_PATH:-"/var/lib/ipa/certs/httpd.crt"}"
-#KEY_PATH="${KEY_PATH:-"/var/lib/ipa/certs/httpd.key"}"
+#KEY_PATH="${KEY_PATH:-"/var/lib/ipa/private/httpd.key"}"
 #RELOAD_CMD="${RELOAD_CMD:-"systemctl restart httpd.service"}"
 
 JSON_QUERY="${JSON_QUERY%?}]}"
