@@ -35,7 +35,7 @@ spec:
             requests:
               cpu: 50m
               memory: 64Mi
-          image: quay.io/kenmoini/lego-bridge:a7c2ef5
+          image: quay.io/kenmoini/lego-bridge:d90d702
           ports:
             - containerPort: 8080
           envFrom:
