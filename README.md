@@ -23,7 +23,7 @@ podman run --rm -d --name lego-bridge \
  -e PDNS_API_KEY="somekeyhere" \
  -e ACME_SERVER_URL="https://step-ca.example.com/acme/acme/directory" \
  -e EMAIL_ADDRESS="you@example.com" \
- -e DNS_SERVERS="192.168.42.9;192.168.42.10" \
+ -e DNS_SERVERS="192.168.42.9,192.168.42.10" \
  -e DNS_SERVER_ONE="192.168.42.9" \
  -e DNS_SERVER_TWO="192.168.42.10" \
  quay.io/kenmoini/lego-bridge:latest
