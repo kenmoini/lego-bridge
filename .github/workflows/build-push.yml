@@ -7,6 +7,9 @@ on:
       - Containerfile
       - main.go
       - .github/workflows/build-push.yml
+      - dns-ping.sh
+      - go.mod
+      - go.sum
 
   # Schedule workflow run at 00:00 on Sunday
   schedule:
