@@ -11,11 +11,11 @@ DNS_SERVER_TWO="${DNS_SERVER_TWO:-"192.168.42.10"}"
 if [ -z $DOMAIN_NAME ]; then
     echo "Usage: $0 <domain-name>"
     exit 1
-fi
+fi]
 
 function digDomain() {
-    dnsPingONE=$(dig @${DNS_SERVER_ONE} -t txt +short _acme-challenge.${DOMAIN_NAME})
-    dnsPingTWO=$(dig @${DNS_SERVER_TWO} -t txt +short _acme-challenge.${DOMAIN_NAME})
+    dnsPingONE=$(dig @${DNS_SERVER_ONE} -t txt +short _acme-challenge.${DOMAIN_NAME#"*."})
+    dnsPingTWO=$(dig @${DNS_SERVER_TWO} -t txt +short _acme-challenge.${DOMAIN_NAME#"*."})
     if [ -z $dnsPingONE ] || [ -z $dnsPingTWO ] ; then
         echo "[WARN] [${DOMAIN_NAME}] DNS record not found"
         sleep 5
