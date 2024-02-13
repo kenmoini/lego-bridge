@@ -30,5 +30,9 @@ if [ $STATUS != "success" ]; then
     exit 1
 fi
 
-echo $REQUEST | jq -r '.certificate' > ./$FIRST_DOMAIN.crt.pem
-echo $REQUEST | jq -r '.key' > ./$FIRST_DOMAIN.key.pem
+if [[ $FIRST_DOMAIN == \*.* ]]; then
+    FIRST_DOMAIN=wildcard-${FIRST_DOMAIN#\*.}
+fi
+
+echo $REQUEST | jq -r '.certificate' > ./${FIRST_DOMAIN}.crt.pem
+echo $REQUEST | jq -r '.key' > ./${FIRST_DOMAIN}.key.pem
