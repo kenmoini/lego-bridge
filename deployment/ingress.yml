@@ -12,6 +12,9 @@ metadata:
     id: lego-bridge
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - lego-bridge.apps.k8s.kemo.labs
   rules:
   - host: lego-bridge.apps.k8s.kemo.labs
     http:
