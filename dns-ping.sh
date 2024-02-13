@@ -14,8 +14,9 @@ if [ -z $DOMAIN_NAME ]; then
 fi
 
 function digDomain() {
-    dnsPingONE=$(dig @${DNS_SERVER_ONE} -t txt +short _acme-challenge.${DOMAIN_NAME#*.})
-    dnsPingTWO=$(dig @${DNS_SERVER_TWO} -t txt +short _acme-challenge.${DOMAIN_NAME#*.})
+    echo "[INFO] [${DOMAIN_NAME#\*.}] Checking DNS record"
+    dnsPingONE=$(dig @${DNS_SERVER_ONE} -t txt +short _acme-challenge.${DOMAIN_NAME#\*.})
+    dnsPingTWO=$(dig @${DNS_SERVER_TWO} -t txt +short _acme-challenge.${DOMAIN_NAME#\*.})
     if [ -z $dnsPingONE ] || [ -z $dnsPingTWO ] ; then
         echo "[WARN] [${DOMAIN_NAME}] DNS record not found"
         sleep 5
