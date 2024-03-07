@@ -3,7 +3,7 @@
 DOMAIN_NAMES=$1
 FIRST_DOMAIN=""
 JSON_QUERY='{"domains":['
-SERVER_ENDPOINT="${SERVER_ENDPOINT:-"http://lego-bridge.apps.k8s.kemo.labs"}"
+SERVER_ENDPOINT="${SERVER_ENDPOINT:-"https://lego-bridge.apps.k8s.kemo.labs"}"
 
 if [ -z $DOMAIN_NAMES ]; then
     echo "Usage: $0 <domain-name>[;<domain-name>...]"
